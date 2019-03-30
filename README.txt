@@ -6,11 +6,13 @@ tl;dr
 1. cp <path-to>/Contrast-*-NO-CACHE.sh img/
 2. cp <path-to>/contrast-*.lic context/
 3. Edit Dockerfile: replace installer filename in "ENV IMAGE" line
-4. ./build
-5. ./run
-6. Give TeamServer 5-10 min to fire up, go to http://localhost:8799/
-7. Do your thing in TS
-8. (when it's time to shutdown) ./stop
+4. Edit Dockerfile: replace license filename in "ENV LIC_FILE" line
+5. Edit ./context/install-input to point use your license filename
+6. ./build
+7. ./run
+8. Give TeamServer 5-10 min to fire up, go to http://localhost:8799/
+9. Do your thing in TS
+10. (when it's time to shutdown) ./stop
 
 
 You may need to increase the resources available to the VM under which
