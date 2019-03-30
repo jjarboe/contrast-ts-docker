@@ -1,0 +1,9 @@
+#!/bin/sh
+
+IMAGE=`grep "ENV IMAGE" Dockerfile | sed 's/^ENV IMAGE //'`
+
+rm -f context/Contrast*.sh
+cp "img/$IMAGE" context/
+
+docker build --no-cache -t contrast:v3.6 -f Dockerfile context
+
