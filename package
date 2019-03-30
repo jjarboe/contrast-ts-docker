@@ -1,0 +1,3 @@
+#!/bin/sh
+
+tar --exclude=.git* --exclude=live-fs --exclude=contrast-*.lic --exclude=Contrast-*.sh -cvf ../team-server-container-builder.tar .
