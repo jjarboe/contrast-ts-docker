@@ -2,17 +2,20 @@ Installs 3.6.0 TS instance using a standard TS no-cache installer.
 Note that the installer image and license have not been included; you will
 need to supply your own and possibly alter these scripts accordingly.
 
-tl;dr
-1. cp <path-to>/Contrast-*-NO-CACHE.sh img/
-2. cp <path-to>/contrast-*.lic context/
-3. Edit Dockerfile: replace installer filename in "ENV IMAGE" line
-4. Edit Dockerfile: replace license filename in "ENV LIC_FILE" line
-5. Edit ./context/install-input to point use your license filename
-6. ./build
-7. ./run
-8. Give TeamServer 5-10 min to fire up, go to http://localhost:8799/
-9. Do your thing in TS
-10. (when it's time to shutdown) ./stop
+Steps
+
+|Action|Comments|
+|---|---|
+| git clone https://github.com/jjarboe/contrast-ts-docker.git && cd contrast-ts-docker | Clone the scripts, set working directory |
+| cp <path-to>/Contrast-*-NO-CACHE.sh img/ | Place installer into "img" subdir |
+| cp <path-to>/contrast-*.lic context/ | Place license into "context" subdir |
+| Edit Dockerfile | replace installer filename in "ENV IMAGE" line, license filename in "ENV LIC_FILE" line |
+| Edit ./context/install-input | Around line 15, change *.lic filename to that used in previous step (but in /tmp directory).  Be careful not to add new lines to the file. |
+| ./build | Build Docker image to be used by run script |
+| ./run | Run Docker image create by build script.  See notes below regarding port and data persistence. |
+| WAIT | Give TeamServer 5-10 min (or more) to fire up |
+| Open http://localhost:8799/ | Do your thing in TS |
+| ./stop | When it's time to shutdown |
 
 
 You may need to increase the resources available to the VM under which
