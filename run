@@ -1,10 +1,11 @@
-#!/bin/sh
+#!/bin/bash
 
 # The local port for TeamServer
 # TeamServer will be available at http://localhost:PORT/
 PORT=8799
 
-D=`pwd`
+D="$(dirname "${BASH_SOURCE[0]}")"
+cd "$D"
 
 # Create a place to hold our TS files, so they persist between container runs
 if ! [ -d "$D"/live-fs ]; then
@@ -22,13 +23,24 @@ fi
 # Grab the hostname and port from the initial install config, since those
 # are hard-coded into the config files generated during install
 
-HOSTNAME=`grep teamserver\\.url data/conf/general.properties | awk '{print $3}' | sed 's#^http://##' | sed 's#:.*$##'`
-iport=`grep teamserver\\.url data/conf/general.properties | awk '{print $3}' | sed 's#^.*:##' | sed 's#/.*$##'`
+conf() {
+    grep "$1" data/conf/general.properties | sed 's/=/ = /' | awk '{print $3}'
+}
+url() {
+    conf teamserver\\.url
+}
+url_nohttp() {
+    url | sed 's#^http[\\:]*//##'
+}
+
+HOSTNAME=`url_nohttp | sed 's#[\\]*:.*$##'`
+iport=`url_nohttp | sed 's#^[^\\]*[\\]*:##' | sed 's#/.*$##'`
 
 popd
 
 # Use the right hostname, so the inter-process connections will work
 docker run --rm --name contrast --hostname "$HOSTNAME" \
        -p $PORT:$iport \
-       -v "$D"/live-fs:/usr/local/contrast \
+       -v "$PWD"/live-fs:/usr/local/contrast \
        contrast:v3.6
+
