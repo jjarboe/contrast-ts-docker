@@ -8,7 +8,7 @@ Steps
 |---|---|
 | git clone https://github.com/jjarboe/contrast-ts-docker.git && cd contrast-ts-docker | Clone the scripts, set working directory |
 | cp &lt;path-to&gt;/Contrast-*-NO-CACHE.sh img/ | Place installer into "img" subdir |
-| cp <path-to>/contrast-*.lic context/ | Place license into "context" subdir |
+| cp &lt;path-to&gt;/contrast-*.lic context/ | Place license into "context" subdir |
 | Edit Dockerfile | replace installer filename in "ENV IMAGE" line, license filename in "ENV LIC_FILE" line |
 | Edit ./context/install-input | Around line 15, change *.lic filename to that used in previous step (but in /tmp directory).  Be careful not to add new lines to the file. |
 | ./build | Build Docker image to be used by run script |
@@ -29,7 +29,7 @@ have a filename matching the pattern Contrast-*-NO-CACHE.sh.  You probably
 only want one such file in img.
 
 The license should be placed into the context/ subdirectory, and typically
-has a filename matching the pattern contrast-<date>.lic.
+has a filename matching the pattern contrast-&lt;date&gt;.lic.
 
 The build script should be run from this directory, and will build a local
 docker image named contrast:v3.6.  It defaults to bypassing the build cache.
