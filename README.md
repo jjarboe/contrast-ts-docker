@@ -7,7 +7,7 @@ Steps
 |Action|Comments|
 |---|---|
 | git clone https://github.com/jjarboe/contrast-ts-docker.git && cd contrast-ts-docker | Clone the scripts, set working directory |
-| cp <path-to>/Contrast-*-NO-CACHE.sh img/ | Place installer into "img" subdir |
+| cp &lt;path-to&gt;/Contrast-*-NO-CACHE.sh img/ | Place installer into "img" subdir |
 | cp <path-to>/contrast-*.lic context/ | Place license into "context" subdir |
 | Edit Dockerfile | replace installer filename in "ENV IMAGE" line, license filename in "ENV LIC_FILE" line |
 | Edit ./context/install-input | Around line 15, change *.lic filename to that used in previous step (but in /tmp directory).  Be careful not to add new lines to the file. |
